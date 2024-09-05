@@ -99,24 +99,51 @@ namespace CapaVista
        
         }
 
+
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                Controlador ctriv = new Controlador();
-                string codigotext = txt_codigo.Text;
-                int id = Convert.ToInt32(codigotext);
-                string n = txt_nombre.Text;
-                string p = txt_puesto.Text;
-                string d = txt_departamento.Text;
-                string estadotxt = txt_estado.Text;
-                int es = Convert.ToInt32(estadotxt);
-                ctriv.modificar(id, n, p, d, es);
-                MessageBox.Show("Registro Modificado Correctamente");
+                // Validar que los campos no estén vacíos
+                if (string.IsNullOrEmpty(txt_codigo.Text) ||
+                    string.IsNullOrEmpty(txt_nombre.Text) ||
+                    string.IsNullOrEmpty(textBox1.Text) ||  // Apellido
+                    string.IsNullOrEmpty(txt_puesto.Text) ||
+                    string.IsNullOrEmpty(textBox2.Text) ||  // Edad
+                    string.IsNullOrEmpty(txt_departamento.Text) ||  // Sexo
+                    string.IsNullOrEmpty(txt_estado.Text))
+                {
+                    MessageBox.Show("Por favor, completa todos los campos.");
+                    return;
+                }
+
+                // Captura de datos
+                int id_empleado = Convert.ToInt32(txt_codigo.Text);
+                string nombre = txt_nombre.Text;
+                string apellido = textBox1.Text;  // Apellido
+                string puesto = txt_puesto.Text;
+                int edad = Convert.ToInt32(textBox2.Text);  // Edad
+                string sexo = txt_departamento.Text;  // Sexo
+                int estado = Convert.ToInt32(txt_estado.Text);
+
+                // Llama al método modificar en el controlador
+                Controlador controlador = new Controlador();
+                controlador.modificar(id_empleado, nombre, apellido, puesto, estado);
+
+                // Mensaje de confirmación
+                MessageBox.Show("Empleado modificado correctamente.");
+
+                // Actualizar el DataGridView
+                actualizardatagridview();
             }
-            catch
+            catch (FormatException)
             {
-                MessageBox.Show("Registro No Modificado");
+                MessageBox.Show("Error en el formato de los datos. Verifica que el ID, edad y estado sean números.");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de cualquier otra excepción
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
             }
         }
 

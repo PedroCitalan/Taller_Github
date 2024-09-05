@@ -33,9 +33,11 @@ namespace CapaControlador
             sn.eliminar(llave);
         }
 
-        public void modificar(int id, string n, string p, string d, int es)
+        public void modificar(int id_empleado, string nombre, string apellido, string puesto, int estado)
         {
-            this.sn.modificar(id,n,p,d,es);
+            // Llamar al método modificar de la capa de datos con id_empleado
+            sn.modificar(id_empleado, nombre, puesto, apellido, estado);
         }
+
     }
 }
