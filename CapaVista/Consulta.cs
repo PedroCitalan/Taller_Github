@@ -119,5 +119,10 @@ namespace CapaVista
                 MessageBox.Show("Registro No Modificado");
             }
         }
+
+        private void Consulta_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
