@@ -36,27 +36,7 @@ namespace CapaVista
 
         }
 
-        private void btn_ingresar_Click(object sender, EventArgs e)
-        {
-            string codigotext = txt_codigo.Text;
-            int codigo = Convert.ToInt32(codigotext);
-            string nombre = txt_nombre.Text;
-            string puesto = txt_puesto.Text;
-            string departamento = txt_departamento.Text;
-            string estadotexto = txt_estado.Text;
-            int estado = Convert.ToInt32(estadotexto);
-
-            try
-            {
-                cn.saveEmpleado(codigo, nombre, puesto, departamento, estado);
-                MessageBox.Show("Registro Agregado correctamente :)");
-            }
-            catch
-            {
-                MessageBox.Show("Registro No ingresado");
-            }
-        }
-
+  
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -91,33 +71,47 @@ namespace CapaVista
 
         private void Dgv_consulta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            txt_codigo.Text = Dgv_consulta.CurrentRow.Cells[0].Value.ToString();
+
             txt_nombre.Text = Dgv_consulta.CurrentRow.Cells[1].Value.ToString();
-            txt_puesto.Text = Dgv_consulta.CurrentRow.Cells[2].Value.ToString();
-            txt_departamento.Text = Dgv_consulta.CurrentRow.Cells[3].Value.ToString();
-            txt_estado.Text = Dgv_consulta.CurrentRow.Cells[4].Value.ToString();
+            txt_apellido.Text = Dgv_consulta.CurrentRow.Cells[2].Value.ToString();
+            txt_puesto.Text = Dgv_consulta.CurrentRow.Cells[3].Value.ToString();
+            txt_codedad.Text = Dgv_consulta.CurrentRow.Cells[4].Value.ToString();
+            txt_codsexo.Text = Dgv_consulta.CurrentRow.Cells[5].Value.ToString();
+            txt_estado.Text = Dgv_consulta.CurrentRow.Cells[6].Value.ToString();
        
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        
+
+        private void button2_Click_1(object sender, EventArgs e)
         {
-            try
-            {
-                Controlador ctriv = new Controlador();
-                string codigotext = txt_codigo.Text;
-                int id = Convert.ToInt32(codigotext);
-                string n = txt_nombre.Text;
-                string p = txt_puesto.Text;
-                string d = txt_departamento.Text;
-                string estadotxt = txt_estado.Text;
-                int es = Convert.ToInt32(estadotxt);
-                ctriv.modificar(id, n, p, d, es);
-                MessageBox.Show("Registro Modificado Correctamente");
-            }
-            catch
-            {
-                MessageBox.Show("Registro No Modificado");
+
+        }
+
+        private void btn_ingresar_Click_1(object sender, EventArgs e)
+        {
+
+                string codigotext = txt_codempleado.Text;
+                int codigo = Convert.ToInt32(codigotext);
+                int codempleado = Convert.ToInt32(codigotext);
+                string nombre = txt_nombre.Text;
+                string apellido = txt_apellido.Text;
+                string codigoedad = txt_codedad.Text;
+                int codedad = Convert.ToInt32(codigoedad);
+                string sexo = txt_codempleado.Text;
+                string estadotexto = txt_estado.Text;
+                int estado = Convert.ToInt32(estadotexto);
+
+                try
+                {
+                    cn.saveEmpleado(codigo, codempleado, nombre, apellido, codedad, sexo, estado);
+                    MessageBox.Show("Registro Agregado correctamente :)");
+                }
+                catch
+                {
+                    MessageBox.Show("Registro No ingresado");
+                }
             }
         }
     }
-}
+
