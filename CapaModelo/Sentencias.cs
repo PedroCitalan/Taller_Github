@@ -33,10 +33,27 @@ namespace CapaModelo
             this.insertarSQL(query);
         }
 
-        public void modificar(int id, string n, string p, string d, int es)
+        public void modificar(int id_empleado, string nombre, string puesto, string apellido, int estado, int edad)
         {
-            string query = this.getModificarQuery(id, n, p, d, es);
-            this.insertarSQL(query);
+            try
+            {
+                // Modificar la consulta para usar id_empleado y edad
+                string query = $"UPDATE empleados SET nombre_empleado = '{nombre}', id_puesto = '{puesto}', apellido_empleado = '{apellido}', estado = {estado}, edad = {edad} " +
+                               $"WHERE id_empleado = {id_empleado};";
+
+                // Verificación para comprobar la consulta
+                Console.WriteLine($"Query: {query}");
+
+                this.insertarSQL(query); // Método para ejecutar la consulta
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al modificar datos: {ex.Message}");
+            }
         }
+
+
+
+
     }
 }
