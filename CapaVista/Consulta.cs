@@ -29,26 +29,27 @@ namespace CapaVista
         private void BtnConsulta_Click(object sender, EventArgs e)
         {
             actualizardatagridview();
+            // Actualizar DataGridView
+            Dgv_consulta.DataSource = cn.actualizarTabla("empleados");
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
+      
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            string codigotext = txt_codigo.Text;
+            string codigotext = txt_codempleado.Text;
             int codigo = Convert.ToInt32(codigotext);
+            int codempleado= Convert.ToInt32(codigotext);
             string nombre = txt_nombre.Text;
-            string puesto = txt_puesto.Text;
-            string departamento = txt_departamento.Text;
+            string apellido = txt_apellido.Text;
+            string codigoedad = txt_codedad.Text;
+            int codedad = Convert.ToInt32(codigoedad);
+            string sexo = txt_codempleado.Text;
             string estadotexto = txt_estado.Text;
             int estado = Convert.ToInt32(estadotexto);
 
             try
             {
-                cn.saveEmpleado(codigo, nombre, puesto, departamento, estado);
+                cn.saveEmpleado(codigo, codempleado, nombre, apellido, codedad, sexo, estado);
                 MessageBox.Show("Registro Agregado correctamente :)");
             }
             catch
@@ -57,32 +58,7 @@ namespace CapaVista
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-            if (MessageBox.Show("¿Esta seguro que desea eliminar este registro?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Controlador ctriv = new Controlador();
-                if (Dgv_consulta.SelectedRows.Count > 0)
-                {
-                    // Obtener la primera fila seleccionada
-                    DataGridViewRow selectedRow = Dgv_consulta.SelectedRows[0];
-
-                    // Obtiene el valor de la primera celda de esa fila y la convierte a entero
-                    if (selectedRow.Cells[0].Value != null)
-                    {
-                        int llave = Convert.ToInt32(selectedRow.Cells[0].Value);
-                        ctriv.eliminar(llave);
-                        MessageBox.Show("Eliminado Exitosamente");
-                    }
-                }
-                else
-                {
-                    // Manejar el caso en el que no hay filas seleccionadas
-                    MessageBox.Show("No hay filas seleccionadas en el DataGridView.");
-                }
-            }
-        }
+     
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -91,10 +67,10 @@ namespace CapaVista
 
         private void Dgv_consulta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            txt_codigo.Text = Dgv_consulta.CurrentRow.Cells[0].Value.ToString();
+            txt_codempleado.Text = Dgv_consulta.CurrentRow.Cells[0].Value.ToString();
             txt_nombre.Text = Dgv_consulta.CurrentRow.Cells[1].Value.ToString();
             txt_puesto.Text = Dgv_consulta.CurrentRow.Cells[2].Value.ToString();
-            txt_departamento.Text = Dgv_consulta.CurrentRow.Cells[3].Value.ToString();
+            txt_codsexo.Text = Dgv_consulta.CurrentRow.Cells[3].Value.ToString();
             txt_estado.Text = Dgv_consulta.CurrentRow.Cells[4].Value.ToString();
        
         }
@@ -104,11 +80,11 @@ namespace CapaVista
             try
             {
                 Controlador ctriv = new Controlador();
-                string codigotext = txt_codigo.Text;
+                string codigotext = txt_codempleado.Text;
                 int id = Convert.ToInt32(codigotext);
                 string n = txt_nombre.Text;
                 string p = txt_puesto.Text;
-                string d = txt_departamento.Text;
+                string d = txt_codsexo.Text;
                 string estadotxt = txt_estado.Text;
                 int es = Convert.ToInt32(estadotxt);
                 ctriv.modificar(id, n, p, d, es);
@@ -122,7 +98,35 @@ namespace CapaVista
 
         private void Consulta_Load(object sender, EventArgs e)
         {
+            Dgv_consulta.DataSource = cn.actualizarTabla("empleados");
+        }
 
+        private void button2_Click_1(object sender, EventArgs e)
+        { 
+
+                if (MessageBox.Show("¿Esta seguro que desea eliminar este registro?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Controlador ctriv = new Controlador();
+                    if (Dgv_consulta.SelectedRows.Count > 0)
+                    {
+                        // Obtener la primera fila seleccionada
+                        DataGridViewRow selectedRow = Dgv_consulta.SelectedRows[0];
+
+                        // Obtiene el valor de la primera celda de esa fila y la convierte a entero
+                        if (selectedRow.Cells[0].Value != null)
+                        {
+                            int llave = Convert.ToInt32(selectedRow.Cells[0].Value);
+                            ctriv.eliminar(llave);
+                            MessageBox.Show("Eliminado Exitosamente");
+                        }
+                    }
+                    else
+                    {
+                        // Manejar el caso en el que no hay filas seleccionadas
+                        MessageBox.Show("No hay filas seleccionadas en el DataGridView.");
+                    }
+                }
+            }
         }
     }
-}
+
