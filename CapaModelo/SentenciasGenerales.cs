@@ -17,39 +17,27 @@ namespace CapaModelo
         }
 
 
-
-        public string getQuery(int codigo, int codempleado, string nombre, string apellido, int edad, string sexo, int estado)
+        public string getQuery(int codigo, string nombre, string puesto, string departamento, int estado)
         {
-            string sql = "INSERT INTO empleados(id_empleado, puesto, nombre_empleado, apellido_empleado, edad, sexo, estado) " +
-                         "VALUES('" + codigo + "', '" + codempleado + "', '" + nombre + "', '" + apellido + "', '" + edad + "', '" + sexo + "', '" + estado + "')";
-            Console.WriteLine(sql); // Para depuración
-            return sql;
+        string sql = "insert into empleados(codigo_empleado, nombre_completo, puesto, departamento, estado)values('" + codigo + "', '" + nombre + "', '" + puesto + "', '" + departamento + "', '" + estado + "')";
+        Console.WriteLine(sql);
+        return sql;
         }
 
-        // Método para ejecutar una consulta SQL
         public void insertarSQL(string query)
         {
-            using (OdbcCommand cmd = new OdbcCommand(query, conn.conexion()))
+            try
             {
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    Console.WriteLine("Datos guardados correctamente.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al guardar los datos: " + ex.Message);
-                }
-                finally
-                {
-                    conn.conexion().Close();
-                }
+                OdbcCommand cmd = new OdbcCommand(query, this.conn.conexion());
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
-    
 
-
-    public string eliminarQuery(int llave)
+        public string eliminarQuery(int llave)
         {
             string sql = "DELETE FROM empleados WHERE codigo_empleado = " + llave + ";";
             Console.WriteLine(sql);

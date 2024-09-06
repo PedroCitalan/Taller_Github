@@ -20,12 +20,10 @@ namespace CapaModelo
             return dataTable;
         }
 
-        public void guardar(int codigo, int codempleado, string nombre, string apellido, int edad, string sexo, int estado)
+        public void guardar(int codigo, string nombre, string puesto, string departamento, int estado)
         {
-            // Se llama al método getQuery con los parámetros correspondientes
-            string query = getQuery(codigo, codempleado, nombre, apellido, edad, sexo, estado);
-
-            // Se ejecuta la consulta SQL de inserción
+           
+            string query = this.getQuery(codigo,nombre,puesto,departamento,estado);
             this.insertarSQL(query);
         }
 

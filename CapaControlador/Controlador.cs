@@ -21,27 +21,12 @@ namespace CapaControlador
             return table;
         }
 
-        public void saveEmpleado(int codigo, int codempleado, string nombre, string apellido, int edad, string sexo, int estado)
+
+        public void saveEmpleado(int codigo, string nombre, string puesto, string departamento,int estado)
         {
-            // Se llama al método guardar del objeto sn con los parámetros correspondientes
-            sn.guardar(codigo, codempleado, nombre, apellido, edad, sexo, estado);
+
+            sn.guardar(codigo, nombre, puesto, departamento, estado);
         }
-
-        public void ingresar(int codigo, int codempleado, string nombre, string apellido, int edad, string sexo, int estado)
-        {
-            // Guardar los datos del empleado
-            saveEmpleado(codigo, codempleado, nombre, apellido, edad, sexo, estado);
-
-        }
-
-
-        // Método para actualizar el DataGridView después de guardar un empleado
-        public DataTable actualizarTabla(string tabla)
-        {
-            return llenarTbl(tabla);
-        }
-
-
 
         public void eliminar(int llave)
         {
@@ -50,7 +35,7 @@ namespace CapaControlador
 
         public void modificar(int id, string n, string p, string d, int es)
         {
-            this.sn.modificar(id, n, p, d, es);
+            this.sn.modificar(id,n,p,d,es);
         }
     }
 }
