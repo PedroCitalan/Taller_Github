@@ -57,28 +57,49 @@ namespace CapaVista
             }
         }
 
+
+        //BOTON ELIMINAR
         private void button2_Click(object sender, EventArgs e)
         {
-
-            if (MessageBox.Show("¿Esta seguro que desea eliminar este registro?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            // Mostramos un mensaje de confirmación al usuario para verificar si realmente desea eliminar el registro.  
+            if (MessageBox.Show("¿Está seguro que desea eliminar este registro?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                // Crea una nueva instancia del controlador. 
                 Controlador ctriv = new Controlador();
+                // Verifica si se ha seleccionado al menos una fila en el DataGridView.  
                 if (Dgv_consulta.SelectedRows.Count > 0)
                 {
-                    // Obtener la primera fila seleccionada
+                    // Obtener la primera fila seleccionada del DataGridView.  
                     DataGridViewRow selectedRow = Dgv_consulta.SelectedRows[0];
 
-                    // Obtiene el valor de la primera celda de esa fila y la convierte a entero
+                    // Compramos si la primera celda de la fila seleccionada no es nula.  
                     if (selectedRow.Cells[0].Value != null)
                     {
-                        int llave = Convert.ToInt32(selectedRow.Cells[0].Value);
-                        ctriv.eliminar(llave);
-                        MessageBox.Show("Eliminado Exitosamente");
+                        try
+                        {
+                            // Convertimos el valor de la primera celda a un entero, que se usará como llave para eliminar el registro. 
+                            int llave = Convert.ToInt32(selectedRow.Cells[0].Value);
+                            // Llamamos al método 'eliminar' del controlador, pasando la llave del registro a eliminar.  
+                            ctriv.eliminar(llave);
+                            MessageBox.Show("Eliminado exitosamente");
+                        }
+                        catch (FormatException ex)
+                        {
+                            MessageBox.Show("Error al convertir el valor: " + ex.Message);
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            MessageBox.Show("Error en la cadena de conexión: " + ex.Message);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Ocurrió un error: " + ex.Message);
+                        }
                     }
                 }
                 else
                 {
-                    // Manejar el caso en el que no hay filas seleccionadas
+                    // Manejar el caso en el que no hay filas seleccionadas  
                     MessageBox.Show("No hay filas seleccionadas en el DataGridView.");
                 }
             }
