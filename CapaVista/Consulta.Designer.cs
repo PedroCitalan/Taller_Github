@@ -36,19 +36,18 @@ namespace CapaVista
             this.txt_nombre = new System.Windows.Forms.TextBox();
             this.txt_estado = new System.Windows.Forms.TextBox();
             this.txt_puesto = new System.Windows.Forms.TextBox();
-            this.txt_departamento = new System.Windows.Forms.TextBox();
+            this.txt_sexo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_eliminar = new System.Windows.Forms.Button();
+            this.btn_modificar = new System.Windows.Forms.Button();
+            this.txt_apellido = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_edad = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_consulta)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,12 +111,12 @@ namespace CapaVista
             this.txt_puesto.Size = new System.Drawing.Size(180, 20);
             this.txt_puesto.TabIndex = 4;
             // 
-            // txt_departamento
+            // txt_sexo
             // 
-            this.txt_departamento.Location = new System.Drawing.Point(138, 193);
-            this.txt_departamento.Name = "txt_departamento";
-            this.txt_departamento.Size = new System.Drawing.Size(180, 20);
-            this.txt_departamento.TabIndex = 12;
+            this.txt_sexo.Location = new System.Drawing.Point(138, 193);
+            this.txt_sexo.Name = "txt_sexo";
+            this.txt_sexo.Size = new System.Drawing.Size(180, 20);
+            this.txt_sexo.TabIndex = 12;
             // 
             // label1
             // 
@@ -165,45 +164,34 @@ namespace CapaVista
             this.label5.TabIndex = 13;
             this.label5.Text = "Estado";
             // 
-            // button1
+            // btn_eliminar
             // 
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(639, 70);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 44);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Refrescar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_eliminar.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_eliminar.Location = new System.Drawing.Point(386, 131);
+            this.btn_eliminar.Name = "btn_eliminar";
+            this.btn_eliminar.Size = new System.Drawing.Size(100, 44);
+            this.btn_eliminar.TabIndex = 18;
+            this.btn_eliminar.Text = "Eliminar";
+            this.btn_eliminar.UseVisualStyleBackColor = true;
+            this.btn_eliminar.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button2
+            // btn_modificar
             // 
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(386, 131);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 44);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "Eliminar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btn_modificar.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_modificar.Location = new System.Drawing.Point(516, 131);
+            this.btn_modificar.Name = "btn_modificar";
+            this.btn_modificar.Size = new System.Drawing.Size(100, 44);
+            this.btn_modificar.TabIndex = 19;
+            this.btn_modificar.Text = "Modificar";
+            this.btn_modificar.UseVisualStyleBackColor = true;
+            this.btn_modificar.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button3
+            // txt_apellido
             // 
-            this.button3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(516, 131);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 44);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "Modificar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(138, 131);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 20);
-            this.textBox1.TabIndex = 8;
+            this.txt_apellido.Location = new System.Drawing.Point(138, 131);
+            this.txt_apellido.Name = "txt_apellido";
+            this.txt_apellido.Size = new System.Drawing.Size(180, 20);
+            this.txt_apellido.TabIndex = 8;
             // 
             // label6
             // 
@@ -223,12 +211,12 @@ namespace CapaVista
             this.label7.TabIndex = 9;
             this.label7.Text = "Edad";
             // 
-            // textBox2
+            // txt_edad
             // 
-            this.textBox2.Location = new System.Drawing.Point(138, 163);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(180, 20);
-            this.textBox2.TabIndex = 10;
+            this.txt_edad.Location = new System.Drawing.Point(138, 163);
+            this.txt_edad.Name = "txt_edad";
+            this.txt_edad.Size = new System.Drawing.Size(180, 20);
+            this.txt_edad.TabIndex = 10;
             // 
             // Consulta
             // 
@@ -236,18 +224,17 @@ namespace CapaVista
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(858, 450);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txt_edad);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txt_apellido);
+            this.Controls.Add(this.btn_modificar);
+            this.Controls.Add(this.btn_eliminar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txt_departamento);
+            this.Controls.Add(this.txt_sexo);
             this.Controls.Add(this.txt_puesto);
             this.Controls.Add(this.txt_estado);
             this.Controls.Add(this.txt_nombre);
@@ -273,18 +260,17 @@ namespace CapaVista
         private System.Windows.Forms.TextBox txt_nombre;
         private System.Windows.Forms.TextBox txt_estado;
         private System.Windows.Forms.TextBox txt_puesto;
-        private System.Windows.Forms.TextBox txt_departamento;
+        private System.Windows.Forms.TextBox txt_sexo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btn_eliminar;
+        private System.Windows.Forms.Button btn_modificar;
+        private System.Windows.Forms.TextBox txt_apellido;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_edad;
     }
 }

@@ -38,22 +38,46 @@ namespace CapaVista
 
         private void btn_ingresar_Click(object sender, EventArgs e)
         {
-            string codigotext = txt_codigo.Text;
-            int codigo = Convert.ToInt32(codigotext);
-            string nombre = txt_nombre.Text;
-            string puesto = txt_puesto.Text;
-            string departamento = txt_departamento.Text;
-            string estadotexto = txt_estado.Text;
-            int estado = Convert.ToInt32(estadotexto);
-
             try
             {
-                cn.saveEmpleado(codigo, nombre, puesto, departamento, estado);
-                MessageBox.Show("Registro Agregado correctamente :)");
+                // Validar que los campos no estén vacíos
+                if (string.IsNullOrEmpty(txt_codigo.Text) ||
+                    string.IsNullOrEmpty(txt_nombre.Text) ||
+                    string.IsNullOrEmpty(txt_apellido.Text) ||
+                    string.IsNullOrEmpty(txt_puesto.Text) ||
+                    string.IsNullOrEmpty(txt_edad.Text) ||
+                    string.IsNullOrEmpty(txt_sexo.Text) ||
+                    string.IsNullOrEmpty(txt_estado.Text))
+                {
+                    MessageBox.Show("Por favor, completa todos los campos.");
+                    return;
+                }
+
+                // Captura de datos
+                int id_empleado = Convert.ToInt32(txt_codigo.Text);
+                string nombre = txt_nombre.Text;
+                string apellido = txt_apellido.Text;
+                string puesto = txt_puesto.Text;
+                int edad = Convert.ToInt32(txt_edad.Text);
+                string sexo = txt_sexo.Text;
+                int estado = Convert.ToInt32(txt_estado.Text);
+
+                cn.saveEmpleado(id_empleado, nombre, apellido, edad, puesto, sexo, estado);
+
+                // Mensaje de confirmación
+                MessageBox.Show("Empleado ingresado correctamente.");
+
+                // Actualizar el DataGridView
+                actualizardatagridview();
             }
-            catch
+            catch (FormatException)
             {
-                MessageBox.Show("Registro No ingresado");
+                MessageBox.Show("Error en el formato de los datos. Verifica que el ID, edad y estado sean números.");
+            }
+            catch (Exception ex)
+            {
+                // Manejo de cualquier otra excepción
+                MessageBox.Show("Ocurrió un error: " + ex.Message);
             }
         }
 
@@ -64,8 +88,6 @@ namespace CapaVista
             // Mostramos un mensaje de confirmación al usuario para verificar si realmente desea eliminar el registro.  
             if (MessageBox.Show("¿Está seguro que desea eliminar este registro?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                // Crea una nueva instancia del controlador. 
-                Controlador ctriv = new Controlador();
                 // Verifica si se ha seleccionado al menos una fila en el DataGridView.  
                 if (Dgv_consulta.SelectedRows.Count > 0)
                 {
@@ -80,8 +102,9 @@ namespace CapaVista
                             // Convertimos el valor de la primera celda a un entero, que se usará como llave para eliminar el registro. 
                             int llave = Convert.ToInt32(selectedRow.Cells[0].Value);
                             // Llamamos al método 'eliminar' del controlador, pasando la llave del registro a eliminar.  
-                            ctriv.eliminar(llave);
+                            cn.eliminar(llave);
                             MessageBox.Show("Eliminado exitosamente");
+                            actualizardatagridview();
                         }
                         catch (FormatException ex)
                         {
@@ -115,7 +138,7 @@ namespace CapaVista
             txt_codigo.Text = Dgv_consulta.CurrentRow.Cells[0].Value.ToString();
             txt_nombre.Text = Dgv_consulta.CurrentRow.Cells[1].Value.ToString();
             txt_puesto.Text = Dgv_consulta.CurrentRow.Cells[2].Value.ToString();
-            txt_departamento.Text = Dgv_consulta.CurrentRow.Cells[3].Value.ToString();
+            txt_sexo.Text = Dgv_consulta.CurrentRow.Cells[3].Value.ToString();
             txt_estado.Text = Dgv_consulta.CurrentRow.Cells[4].Value.ToString();
        
         }
@@ -128,10 +151,10 @@ namespace CapaVista
                 // Validar que los campos no estén vacíos
                 if (string.IsNullOrEmpty(txt_codigo.Text) ||
                     string.IsNullOrEmpty(txt_nombre.Text) ||
-                    string.IsNullOrEmpty(textBox1.Text) ||  // Apellido
+                    string.IsNullOrEmpty(txt_apellido.Text) ||
                     string.IsNullOrEmpty(txt_puesto.Text) ||
-                    string.IsNullOrEmpty(textBox2.Text) ||  // Edad
-                    string.IsNullOrEmpty(txt_departamento.Text) ||  // Sexo
+                    string.IsNullOrEmpty(txt_edad.Text) ||
+                    string.IsNullOrEmpty(txt_sexo.Text) ||
                     string.IsNullOrEmpty(txt_estado.Text))
                 {
                     MessageBox.Show("Por favor, completa todos los campos.");
@@ -141,15 +164,14 @@ namespace CapaVista
                 // Captura de datos
                 int id_empleado = Convert.ToInt32(txt_codigo.Text);
                 string nombre = txt_nombre.Text;
-                string apellido = textBox1.Text;  // Apellido
+                string apellido = txt_apellido.Text;
                 string puesto = txt_puesto.Text;
-                int edad = Convert.ToInt32(textBox2.Text);  // Edad
-                string sexo = txt_departamento.Text;  // Sexo
+                int edad = Convert.ToInt32(txt_edad.Text);
+                string sexo = txt_sexo.Text;
                 int estado = Convert.ToInt32(txt_estado.Text);
 
                 // Llama al método modificar en el controlador
-                Controlador controlador = new Controlador();
-                controlador.modificar(id_empleado, nombre, apellido, puesto, estado);
+                cn.modificar(id_empleado, nombre, apellido, edad, puesto, sexo, estado);
 
                 // Mensaje de confirmación
                 MessageBox.Show("Empleado modificado correctamente.");

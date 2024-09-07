@@ -23,10 +23,9 @@ namespace CapaControlador
         }
 
 
-        public void saveEmpleado(int codigo, string nombre, string puesto, string departamento,int estado)
+        public void saveEmpleado(int id_empleado, string nombre, string apellido, int edad, string puesto, string sexo, int estado)
         {
-
-            sn.guardar(codigo, nombre, puesto, departamento, estado);
+            sn.guardar(id_empleado, nombre, puesto, apellido, edad, sexo, estado);
         }
 
         public void eliminar(int llave)
@@ -46,10 +45,10 @@ namespace CapaControlador
             }
         }
 
-        public void modificar(int id_empleado, string nombre, string apellido, string puesto, int estado)
+        public void modificar(int id_empleado, string nombre, string apellido, int edad, string puesto, string sexo, int estado)
         {
             // Llamar al método modificar de la capa de datos con id_empleado
-            sn.modificar(id_empleado, nombre, puesto, apellido, estado);
+            sn.modificar(id_empleado, nombre, puesto, apellido, edad, sexo, estado);
         }
 
     }
