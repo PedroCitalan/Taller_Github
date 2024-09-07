@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CapaModelo;
 using System.Data.Odbc;
 using System.Data;
+//using System.Data.SqlClient; // Asegúrate de importar esto si usas SqlConnection  
 
 namespace CapaControlador
 {
@@ -30,7 +31,19 @@ namespace CapaControlador
 
         public void eliminar(int llave)
         {
-            sn.eliminar(llave);
+            // Establece la conexión a la base de datos usando ODBC  
+            using (OdbcConnection connection = new OdbcConnection("Dsn=ventasemp"))
+            {
+                connection.Open();
+                string query = "DELETE FROM empleados WHERE id_empleado = ?"; // Usa '?' como marcador de posición para parámetros  
+
+                using (OdbcCommand command = new OdbcCommand(query, connection))
+                {
+                    // Usamos un parámetro para evitar inyección SQL  
+                    command.Parameters.AddWithValue("?", llave); // Agrega el parámetro  
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
         public void modificar(int id_empleado, string nombre, string apellido, string puesto, int estado)
